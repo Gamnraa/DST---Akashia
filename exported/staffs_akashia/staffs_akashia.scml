@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="staff01_ground">
+        <file id="0" name="staff01_ground/staff01_ground-0.png" width="145" height="212" pivot_x="0.289655" pivot_y="0.099057"/>
+    </folder>
+    <folder id="1" name="staff02_ground">
+        <file id="0" name="staff02_ground/staff02_ground-0.png" width="198" height="210" pivot_x="0.232323" pivot_y="0.085714"/>
+    </folder>
+    <folder id="2" name="swap_staff01">
+        <file id="0" name="swap_staff01/swap_staff01-0.png" width="116" height="239" pivot_x="0.491379" pivot_y="0.267782"/>
+    </folder>
+    <folder id="3" name="swap_staff02">
+        <file id="0" name="swap_staff02/swap_staff02-0.png" width="149" height="263" pivot_x="0.442953" pivot_y="0.357414"/>
+    </folder>
+    <folder id="4" name="staff03_ground">
+        <file id="0" name="staff03_ground/staff03_ground-0.png" width="190" height="205" pivot_x="0.236842" pivot_y="0.087805"/>
+    </folder>
+    <folder id="5" name="swap_staff03">
+        <file id="0" name="swap_staff03/swap_staff03-0.png" width="117" height="253" pivot_x="0.316239" pivot_y="0.233202"/>
+    </folder>
+    <entity id="0" name="staffs_akashia">
+        <animation id="0" name="idle1" length="250" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="staff01_ground-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="0.893617" y="-0.914894" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="idle2" length="250" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="staff02_ground-0">
+                <key id="0" spin="0">
+                    <object folder="1" file="0" x="2.272727" y="-0.757576" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="2" name="idle3" length="250" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="staff03_ground-0">
+                <key id="0" spin="0">
+                    <object folder="4" file="0" x="3" y="-3"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>
