@@ -37,6 +37,15 @@ Assets = {
 	
 	Asset( "IMAGE", "images/names_gold_akashia.tex" ),
     Asset( "ATLAS", "images/names_gold_akashia.xml" ),
+
+    Asset( "IMAGE", "images/inventoryimages/staff01_inv_images.tex"),
+    Asset( "ATLAS", "images/inventoryimages/staff01_inv_images.xml"),
+
+    Asset( "IMAGE", "images/inventoryimages/staff02_inv_images.tex"),
+    Asset( "ATLAS", "images/inventoryimages/staff02_inv_images.xml"),
+
+    Asset( "IMAGE", "images/inventoryimages/staff03_inv_images.tex"),
+    Asset( "ATLAS", "images/inventoryimages/staff03_inv_images.xml"),
 }
 
 AddMinimapAtlas("images/map_icons/akashia.xml")

@@ -47,7 +47,7 @@ end
 		inst.entity:AddNetwork()
 		
 		MakeInventoryPhysics(inst)
-		inst.AnimState:SetBank(build .. "_ground")
+		inst.AnimState:SetBank("staffs_akashia")
 		inst.AnimState:SetBuild(build .. "_ground")
 		inst.AnimState:PlayAnimation("idle")
 		if not TheWorld.ismastersim then
@@ -90,7 +90,7 @@ end
 			end
 		end
 		MakeHauntableLaunch(inst)
-        
+
 		return inst
 	end
 
