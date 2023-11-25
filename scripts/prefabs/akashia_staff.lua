@@ -8,7 +8,8 @@ local castLines = {
 }
 	
 local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_object", "swap_" .. inst.build, "swap_" .. inst.prefab)
+    print("swap_" .. inst.build)
+    owner.AnimState:OverrideSymbol("swap_object", "staffs_akashia", "swap_" .. inst.build)
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end
@@ -47,9 +48,10 @@ end
 		inst.entity:AddNetwork()
 		
 		MakeInventoryPhysics(inst)
+        --Bank name is the entity name, build name is the name of the compiled zip file
 		inst.AnimState:SetBank("staffs_akashia")
-		inst.AnimState:SetBuild(build .. "_ground")
-		inst.AnimState:PlayAnimation("idle")
+		inst.AnimState:SetBuild("staffs_akashia")
+		inst.AnimState:PlayAnimation("idle" .. level)
 		if not TheWorld.ismastersim then
 			return inst
 		end
