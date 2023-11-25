@@ -55,5 +55,17 @@
                 </key>
             </timeline>
         </animation>
+		<animation id="3" name="BUILD" length="250" interval="100">
+			<mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="swap_staff01-0">
+                <key id="0" spin="0">
+                    <object folder="0" file="0" x="0.893617" y="-0.914894" angle="0"/>
+                </key>
+            </timeline>
+		</animation>
     </entity>
 </spriter_data>

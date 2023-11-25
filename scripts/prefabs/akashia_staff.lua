@@ -8,7 +8,6 @@ local castLines = {
 }
 	
 local function onequip(inst, owner)
-    print("swap_" .. inst.build)
     owner.AnimState:OverrideSymbol("swap_object", "staffs_akashia", "swap_" .. inst.build)
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
