@@ -89,11 +89,11 @@ end
 				end
 			end
 		end
-		
+		MakeHauntableLaunch(inst)
+        
 		return inst
 	end
 
-    MakeHauntableLaunch(inst)
 
     return Prefab(name, fn, assets)
 end
