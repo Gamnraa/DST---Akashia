@@ -96,3 +96,6 @@ AddModCharacter("akashia", "FEMALE", skin_modes)
 RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/staff01_inv_images.xml"), "staff01_inv_images.tex")
 RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/staff02_inv_images.xml"), "staff02_inv_images.tex")
 RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/staff03_inv_images.xml"), "staff03_inv_images.tex")
+
+
+TUNING.AKASHIA_MAX_HEALING = 75

@@ -20,15 +20,21 @@ end
 
 local function AttemptSpell(inst, target)
 	local caster = inst.components.inventoryitem.owner	
-    if caster.components.health.current >= inst.power / 2 then
-
+    if caster.components.health.currenthealth >= inst.power / 2 and target ~= caster then
 		caster.components.health:DoDelta(-inst.power / 2)
 		caster.components.talker:Say(castLines[math.random(#castLines)])
         target.components.health:DoDelta(inst.power)
-        if inst.level == 3 then
-            print("Heal over time")
+        if inst.power == 3 then
+            --
         end
-	else 
+	elseif target == caster and caster.components.health.currenthealth >= TUNING.AKASHIA_MAX_HEALING / 2 then
+        caster.components.health:DoDelta(-TUNING.AKASHIA_MAX_HEALING / 2)
+        local pos = caster:GetPosition()
+        for _, v in pairs(TheSim:FindEntities(pos.x, pos.y, pos.z, 9, {"_combat"}, {"monster", "epic", "playerghost"}, {"player", "companion"})) do
+            if v.components.health then v.components.health:DoDelta(TUNING.AKASHIA_MAX_HEALING) end
+        end
+        
+    else
 		caster.components.talker:Say("I can't concentrate!")	  
     end
  
