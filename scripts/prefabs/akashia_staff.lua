@@ -18,11 +18,6 @@ local function onunequip(inst, owner)
     owner.AnimState:Show("ARM_normal")
 end
 
------------------------------------------
--- Function that calls when the player attempts to cast a spell with PSI Shield
--- inst - the object instance (The PSI Shield item)
--- target - the target the player is casting the spell on
------------------------------------------
 local function AttemptSpell(inst, target)
 	local caster = inst.components.inventoryitem.owner	
     if caster.components.health.current >= inst.power / 2 then
@@ -58,8 +53,8 @@ end
 		
 		inst:AddComponent("spellcaster")	
 		inst.components.spellcaster:SetSpellFn(AttemptSpell)
-		--inst.components.spellcaster.canuseontargets = true	
-		inst.components.spellcaster.canonlyuseonlocomotors = true
+		inst.components.spellcaster.canuseontargets = true	
+		if level == 3 then inst.components.spellcaster.canonlyuseonlocomotors = true end
 		inst.components.spellcaster.canonlyuseoncombat = true
 
 		inst:AddComponent("weapon")
