@@ -97,5 +97,7 @@ RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/staff0
 RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/staff02_inv_images.xml"), "staff02_inv_images.tex")
 RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/staff03_inv_images.xml"), "staff03_inv_images.tex")
 
-
+TUNING.AKASHIA_HEALTH = 300
+TUNING.AKASHIA_SANITY = 125
+TUNING.AKASHIA_SANITY = 125
 TUNING.AKASHIA_MAX_HEALING = 75
