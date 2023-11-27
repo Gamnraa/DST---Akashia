@@ -24,6 +24,10 @@ local function AttemptSpell(inst, target)
 		caster.components.health:DoDelta(-inst.power / 2)
 		caster.components.talker:Say(castLines[math.random(#castLines)])
         target.components.health:DoDelta(inst.power)
+        local fx = SpawnPrefab("wortox_soul_heal_fx")
+        fx.AnimState:SetHue(50)
+        fx.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, -50, 0)
+        fx:Setup(target)
         if inst.power == 3 then
             --
         end
@@ -31,7 +35,15 @@ local function AttemptSpell(inst, target)
         caster.components.health:DoDelta(-TUNING.AKASHIA_MAX_HEALING / 2)
         local pos = caster:GetPosition()
         for _, v in pairs(TheSim:FindEntities(pos.x, pos.y, pos.z, 9, {"_combat"}, {"monster", "epic", "playerghost"}, {"player", "companion"})) do
-            if v.components.health then v.components.health:DoDelta(TUNING.AKASHIA_MAX_HEALING) end
+            print(v)
+            if v.components.health then 
+                v.components.health:DoDelta(TUNING.AKASHIA_MAX_HEALING)
+                local fx = SpawnPrefab("wortox_soul_heal_fx")
+                local colourfn = fx:DoPeriodicTask(.167, function() fx.AnimState:SetAddColour(math.random(256) / 255, math.random(256) / 255, math.random(256) / 255, 0) end)
+                fx:DoTaskInTime(1.5, function() colourfn:Cancel() end)
+                fx.entity:AddFollower():FollowSymbol(v.GUID, v.components.combat.hiteffectsymbol, 0, -50, 0)
+                fx:Setup(v) 
+            end
         end
         
     else
