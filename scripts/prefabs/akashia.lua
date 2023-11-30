@@ -35,20 +35,15 @@ local function ontemperaturechange(inst, data)
 	end
 end
 
-local function setcustomrate(inst)
-	local delta = 0
-	ontemperaturechange(inst, {new = inst.components.temperature.current})
-	inst.components.locomotor.walkspeed = (TUNING.WILSON_WALK_SPEED)
-	inst.components.locomotor.runspeed = (TUNING.WILSON_RUN_SPEED)
-	
-	if inst.components.freezable:IsFrozen() then delta = .5 
-	elseif inst.components.burnable:IsBurning() then
-		delta = -.5
-		inst.components.combat.damagemultiplier = inst.components.combat.damagemultiplier + 1
-		inst.components.locomotor.walkspeed = (TUNING.WILSON_WALK_SPEED * 1.75)
-		inst.components.locomotor.runspeed = (TUNING.WILSON_RUN_SPEED * 1.75)
+local function updateentitiesinrange(inst)
+	local pos = caster:GetPosition()
+	for _, v in pairs(inst.entsProtecting) do
+		v:RemoveTag("AkashiasProtection")
 	end
-	return delta
+	inst.entsProtecting = {}
+	for _, v in pairs(TheSim:FindEntities(pos.x, pos.y, pos.z, 3, {"_combat", "player"}, {"playerghost"})) do
+		v:AddTag("AkashiasProtection")
+	end
 end	
 
 -- When the character is revived from human
@@ -95,23 +90,20 @@ local master_postinit = function(inst)
 	
 	-- Stats	
 	inst.components.health:SetMaxHealth(TUNING.AKASHIA_HEALTH)
-	inst.components.health.fire_damage_scale = TUNING.WILLOW_FIRE_DAMAGE
-    
 	inst.components.hunger:SetMax(TUNING.AKASHIA_HUNGER)
 	inst.components.sanity:SetMax(TUNING.AKASHIA_SANITY)
-	inst.components.sanity.custom_rate_fn = setcustomrate
 	
 	-- Damage multiplier (optional)
     inst.components.combat.damagemultiplier = 1
 	
 	-- Hunger rate (optional)
 	inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
-
-	inst.components.temperature.inherentinsulation = 75
-	inst.components.temperature.inherentsummerinsulation = 75
 	
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload
+	
+	inst.entsProtecting = {}
+	inst:DoPeriodicTask(1, function() updateentitiesinrange(inst) end)
 	
 end
 
