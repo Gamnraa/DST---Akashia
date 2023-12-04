@@ -19,30 +19,17 @@ for k, v in pairs(TUNING.GAMEMODE_STARTING_ITEMS) do
 end
 local prefabs = FlattenTree(start_inv, true)
 
-local function ontemperaturechange(inst, data)
-	inst.components.combat.damagemultiplier = 1
-	inst.components.sanity.dapperness = 0
-	
-	local sanitydelta = (TUNING.STARTING_TEMP - data.new)
-	if not (sanitydelta > -4 and sanitydelta < 4) then
-		sanitydelta = sanitydelta / 100
-		local combatmod = 1 + (sanitydelta * -1)
-		
-		
-		--print("sanitydelta", sanitydelta, "combatmod", combatmod)
-		inst.components.combat.damagemultiplier = combatmod > 0 and combatmod or .25
-		inst.components.sanity.dapperness = sanitydelta
-	end
-end
-
 local function updateentitiesinrange(inst)
-	local pos = caster:GetPosition()
+	local pos = inst:GetPosition()
 	for _, v in pairs(inst.entsProtecting) do
 		v:RemoveTag("AkashiasProtection")
 	end
 	inst.entsProtecting = {}
 	for _, v in pairs(TheSim:FindEntities(pos.x, pos.y, pos.z, 3, {"_combat", "player"}, {"playerghost"})) do
-		v:AddTag("AkashiasProtection")
+		--if v ~= inst then
+		--	if v.components.talker then v.components.talker:Say("Nature prevails!") end
+			v:AddTag("AkashiasProtection")
+		--end
 	end
 end	
 
@@ -101,7 +88,7 @@ local master_postinit = function(inst)
 	
 	inst.OnLoad = onload
     inst.OnNewSpawn = onload
-	
+
 	inst.entsProtecting = {}
 	inst:DoPeriodicTask(1, function() updateentitiesinrange(inst) end)
 	
