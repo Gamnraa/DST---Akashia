@@ -38,14 +38,14 @@ Assets = {
 	Asset( "IMAGE", "images/names_gold_akashia.tex" ),
     Asset( "ATLAS", "images/names_gold_akashia.xml" ),
 
-    Asset( "IMAGE", "images/inventoryimages/staff01_inv_images.tex"),
-    Asset( "ATLAS", "images/inventoryimages/staff01_inv_images.xml"),
+    Asset( "IMAGE", "images/inventoryimages/akashia_staff1.tex"),
+    Asset( "ATLAS", "images/inventoryimages/akashia_staff1.xml"),
 
-    Asset( "IMAGE", "images/inventoryimages/staff02_inv_images.tex"),
-    Asset( "ATLAS", "images/inventoryimages/staff02_inv_images.xml"),
+    Asset( "IMAGE", "images/inventoryimages/akashia_staff2.tex"),
+    Asset( "ATLAS", "images/inventoryimages/akashia_staff2.xml"),
 
-    Asset( "IMAGE", "images/inventoryimages/staff03_inv_images.tex"),
-    Asset( "ATLAS", "images/inventoryimages/staff03_inv_images.xml"),
+    Asset( "IMAGE", "images/inventoryimages/akashia_staff3.tex"),
+    Asset( "ATLAS", "images/inventoryimages/akashia_staff3.xml"),
 }
 
 AddMinimapAtlas("images/map_icons/akashia.xml")
@@ -93,9 +93,9 @@ RemapSoundEvent( "dontstarve/characters/akashia/sinking", "akashia/characters//a
 -- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
 AddModCharacter("akashia", "FEMALE", skin_modes)
 
-RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/staff01_inv_images.xml"), "staff01_inv_images.tex")
-RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/staff02_inv_images.xml"), "staff02_inv_images.tex")
-RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/staff03_inv_images.xml"), "staff03_inv_images.tex")
+RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/akashia_staff1.xml"), "akashia_staff1.tex")
+RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/akashia_staff2.xml"), "akashia_staff2.tex")
+RegisterInventoryItemAtlas(GLOBAL.resolvefilepath("images/inventoryimages/akashia_staff3.xml"), "akashia_staff3.tex")
 
 TUNING.AKASHIA_HEALTH = 300
 TUNING.AKASHIA_SANITY = 125
