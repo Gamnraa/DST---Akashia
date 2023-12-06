@@ -101,3 +101,18 @@ TUNING.AKASHIA_HEALTH = 300
 TUNING.AKASHIA_SANITY = 125
 TUNING.AKASHIA_SANITY = 125
 TUNING.AKASHIA_MAX_HEALING = 75
+
+
+AddComponentPostInit("combat", function(cmbt)
+    local old_getattacked = cmbt.GetAttacked
+    cbmt:GetAttacked(self, attacker, damage, weapon, stimuli, spdamage, ...)
+        if self.inst:HasTag("AkashiasProtection") then
+            if self.inst.akasahia and not self.inst.akashia.components.health:IsDead() then
+                self.inst.akasahia.components.talker:Say("Protected")
+                self.inst.akashia.components.health:DoDelta(-damage / 2)
+                return old_getattacked(self, attacker, damage / 2, weapon, stimuli, spdamage, ...)
+            end
+        end
+        return old_getattacked(self, attacker, damage, weapon, stimuli, spdamage, ...)
+    end
+)

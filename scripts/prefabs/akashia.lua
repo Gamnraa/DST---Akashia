@@ -22,12 +22,14 @@ local prefabs = FlattenTree(start_inv, true)
 local function updateentitiesinrange(inst)
 	local pos = inst:GetPosition()
 	for _, v in pairs(inst.entsProtecting) do
+		v.askashia = nil
 		v:RemoveTag("AkashiasProtection")
 	end
 	inst.entsProtecting = {}
 	for _, v in pairs(TheSim:FindEntities(pos.x, pos.y, pos.z, 3, {"_combat", "player"}, {"playerghost"})) do
 		--if v ~= inst then
 		--	if v.components.talker then v.components.talker:Say("Nature prevails!") end
+			v.askashia = inst
 			v:AddTag("AkashiasProtection")
 		--end
 	end
