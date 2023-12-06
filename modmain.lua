@@ -107,8 +107,8 @@ AddComponentPostInit("combat", function(cmbt)
     local old_getattacked = cmbt.GetAttacked
     cmbt.GetAttacked = function(self, attacker, damage, weapon, stimuli, spdamage, ...)
         if self.inst:HasTag("AkashiasProtection") then
-            if self.inst.akasahia and not self.inst.akashia.components.health:IsDead() then
-                self.inst.akasahia.components.talker:Say("Protected")
+            if self.inst.akashia and not self.inst.akashia.components.health:IsDead() then
+                self.inst.akashia.components.talker:Say("Protected")
                 self.inst.akashia.components.health:DoDelta(-damage / 2)
                 return old_getattacked(self, attacker, damage / 2, weapon, stimuli, spdamage, ...)
             end
