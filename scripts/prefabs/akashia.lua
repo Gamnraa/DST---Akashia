@@ -30,6 +30,7 @@ local function updateentitiesinrange(inst)
 		if v ~= inst then
 			v.akashia = inst
 			v:AddTag("AkashiasProtection")
+			table.insert(inst.entsProtecting, v)
 		end
 	end
 end	
