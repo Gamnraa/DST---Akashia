@@ -113,6 +113,9 @@ end
     return Prefab(name, fn, assets)
 end
 
+STRINGS.NAMES.AKASHIA_STAFF1 = "Waning Caregiver's Staff"
+STRINGS.NAMES.AKASHIA_STAFF2 = "Waxing Caregiver's Staff"
+STRINGS.NAMES.AKASHIA_STAFF3 = "Staff of the Full Moon"
 return CreateStaff("akashia_staff1", "staff01", 1),
 	   CreateStaff("akashia_staff2", "staff02", 2),
        CreateStaff("akashia_staff3", "staff03", 3)
