@@ -76,6 +76,9 @@ local function fn()
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_INSTANT_REZ)
     inst.components.hauntable:SetOnHauntFn(onhaunt)
 
+    inst:AddComponent("rechargeablealtar")
+    inst.components.rechargeablealtar:SetAcceptedItems(TUNING.ALTAR_AKASHIA_ITEMS)
+
     inst._task = nil
 
     inst:ListenForEvent("activateresurrection", onactivateresurrection)

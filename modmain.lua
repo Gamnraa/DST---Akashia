@@ -116,3 +116,36 @@ AddComponentPostInit("combat", function(cmbt)
         return old_getattacked(self, attacker, damage, weapon, stimuli, spdamage, ...)
     end
 end)
+
+local ActionHandler = GLOBAL.ActionHandler
+local ACCEPT_ALTAR_FUEL = AddAction("ALTAR_REFUEL", "Refuel", function(act)
+    if act.doer.components.inventory and act.invobject then
+        local fuel = act.doer.components.inventory:RemoveItem(act.invobject)
+        if fuel and act.target.components.rechargeablealtar.accepting then
+            if act.target.components.fueled and act.target.components.rechargeablealtar:ReceiveFuel(fuel) then
+                return true
+            end
+        else
+            local line = GLOBAL.GetString(act.doer, "ANNOUNCE_AKASHIA_ALTAR_FULL") or "It's already charged!"
+            if act.doer.components.talker then act.doer.components.talker:Say(line) end
+            return false
+        end
+    end
+end)
+
+ACCEPT_ALTAR_FUEL.silent_fail = true
+
+AddStategraphActionHandler("wilson", ActionHandler(GLOBAL.ACTIONS.ALTAR_REFUEL, "give"))
+AddStategraphActionHandler("wilson_client", ActionHandler(GLOBAL.ACTIONS.ALTAR_REFUEL, "give"))
+
+local function CanGiveAkashiaAltar(inst, doer, target, actions)
+    if not (doer.replica.rider and doer.replica.rider:IsRiding())
+    or (target.replica.inventoryitem and target.replica.inventoryitem:IsGrandOwner(doer)) then
+        if target.components.rechargeablealtar and target.components.rechargeablealtar.accepteditems[inst.prefab] then
+            table.insert(actions, GLOBAL.ACTIONS.ALTAR_REFUEL)
+        end
+    end
+end
+AddComponentAction("USEITEM", "rechargeablealtar", CanGiveAkashiaAltar)
+        
+
