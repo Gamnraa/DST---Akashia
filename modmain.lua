@@ -101,6 +101,12 @@ TUNING.AKASHIA_HEALTH = 300
 TUNING.AKASHIA_SANITY = 125
 TUNING.AKASHIA_SANITY = 125
 TUNING.AKASHIA_MAX_HEALING = 75
+TUNING.ALTAR_AKASHIA_ITEMS = {
+    ["petals"] = 1,
+    ["seeds"] = 1,
+    ["nightmarefuel"] = 25,
+    ["livinglog"] = 35
+}
 
 
 AddComponentPostInit("combat", function(cmbt)
