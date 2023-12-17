@@ -85,3 +85,5 @@ local function fn()
 
     return inst
 end
+
+return Prefab("altar_akashia", fn, assets)
