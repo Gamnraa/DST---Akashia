@@ -1,6 +1,6 @@
 local RechargeableAltar = Class(function(self, inst)
     self.inst = inst
-    self.maxcharges = 1
+    self.maxcharges = 2
     self.currentcharges = 1
     self.maxfuel = 100
     self.currentfuel = 0
@@ -13,6 +13,8 @@ function RechargeableAltar:IsCharged() return self.currentcharges > 0 end
 
 function RechargeableAltar:SetMaxCharges(amount)
     self.maxcharges = amount
+    self.accepting = self.currentcharges < self.maxcharges
+    self.currentcharges = self.accepting and self.currentcharges or self.maxcharges
 end
 
 function RechargeableAltar:SetMaxFuel(amount)
@@ -32,7 +34,7 @@ function RechargeableAltar:UseCharge()
 end
 
 function RechargeableAltar:ReceiveFuel(item)
-    self.currentfuel = self.currentfuel + self.accepteditems[item] or 1
+    self.currentfuel = self.currentfuel + (self.accepteditems[item.prefab] or 1)
     if self.currentfuel >= self.maxfuel then
         self.currentcharges = self.currentcharges + 1
         self.currentfuel = 0
