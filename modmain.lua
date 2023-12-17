@@ -1,7 +1,8 @@
 PrefabFiles = {
 	"akashia",
 	"akashia_none",
-    "akashia_staff"
+    "akashia_staff",
+    "altar_akashia"
 }
 
 Assets = {
@@ -128,7 +129,7 @@ local ACCEPT_ALTAR_FUEL = AddAction("ALTAR_REFUEL", "Refuel", function(act)
     if act.doer.components.inventory and act.invobject then
         local fuel = act.doer.components.inventory:RemoveItem(act.invobject)
         if fuel and act.target.components.rechargeablealtar.accepting then
-            if act.target.components.fueled and act.target.components.rechargeablealtar:ReceiveFuel(fuel) then
+            if act.target.components.rechargeablealtar and act.target.components.rechargeablealtar:ReceiveFuel(fuel) then
                 return true
             end
         else
@@ -152,6 +153,6 @@ local function CanGiveAkashiaAltar(inst, doer, target, actions)
         end
     end
 end
-AddComponentAction("USEITEM", "rechargeablealtar", CanGiveAkashiaAltar)
+AddComponentAction("USEITEM", "inspectable", CanGiveAkashiaAltar)
         
 
