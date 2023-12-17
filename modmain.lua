@@ -135,6 +135,7 @@ local ACCEPT_ALTAR_FUEL = AddAction("ALTAR_REFUEL", "Refuel", function(act)
         else
             local line = GLOBAL.GetString(act.doer, "ANNOUNCE_AKASHIA_ALTAR_FULL") or "It's already charged!"
             if act.doer.components.talker then act.doer.components.talker:Say(line) end
+            act.doer.components.inventory:GiveItem(fuel)
             return false
         end
     end
