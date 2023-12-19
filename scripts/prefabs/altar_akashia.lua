@@ -112,5 +112,6 @@ local function fn()
 
     return inst
 end
+STRINGS.NAMES.ALTAR_AKASHIA = "Lunar Soul-Catcher"
 
 return Prefab("altar_akashia", fn, assets)
