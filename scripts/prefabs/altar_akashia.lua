@@ -20,7 +20,7 @@ local function onhaunt(inst, haunter)
     if not inst._task then
         inst.AnimState:PlayAnimation("active_pst")
         inst.AnimState:PushAnimation("inactive", true)
-        inst._task = inst:DoTaskInTime(TIMEOUT, OnTimeout)
+        inst._task = inst:DoTaskInTime(TIMEOUT, ontimeout)
         return true
     end
 end
@@ -32,7 +32,8 @@ end
 local function checkforghost(inst)
     if inst.components.rechargeablealtar:IsCharged() then
         local pos = inst:GetPosition()
-        local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, TUNING.RESEARCH_MACHINE_DIST, {"playerghost"})
+        local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, TUNING.RESEARCH_MACHINE_DIST + 1, {"playerghost"})
+        print(#ents)
         local isGhostNear = #ents > 0
 
         if inst.AnimState:IsCurrentAnimation("inactive") and isGhostNear then
@@ -108,6 +109,7 @@ local function fn()
     inst._task = nil
 
     inst:ListenForEvent("activateresurrection", onactivateresurrection)
+    inst:DoTaskInTime(.5, function(inst) checkforghost(inst) end)
 
     return inst
 end
