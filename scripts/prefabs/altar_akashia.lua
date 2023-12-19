@@ -58,7 +58,6 @@ local function onactivateresurrection(inst, target)
         inst._task = nil
     end
     TheWorld:PushEvent("ms_sendlightningstrike", inst:GetPosition())
-    target:PushEvent("usedtouchstone", inst)
     inst.components.rechargeablealtar:UseCharge()
     if not inst.components.rechargeablealtar:IsCharged() then
         inst:RemoveComponent("hauntable")

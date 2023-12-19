@@ -155,5 +155,15 @@ local function CanGiveAkashiaAltar(inst, doer, target, actions)
     end
 end
 AddComponentAction("USEITEM", "inspectable", CanGiveAkashiaAltar)
+
+local function OnRespawnFromGhost(inst, data)
+    if data.source.prefab == "altar_akashia" then
+        inst:DoTaskInTime(0, function() data.source:PushEvent("activateresurrection", inst) end)
+    end
+end
+
+AddPlayerPostInit(function(inst)
+    inst:ListenForEvent("respawnfromghost", OnRespawnFromGhost)
+end)
         
 
