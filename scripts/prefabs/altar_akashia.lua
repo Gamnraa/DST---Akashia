@@ -33,7 +33,6 @@ local function checkforghost(inst)
     if inst.components.rechargeablealtar:IsCharged() then
         local pos = inst:GetPosition()
         local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, TUNING.RESEARCH_MACHINE_DIST + 1, {"playerghost"})
-        print(#ents)
         local isGhostNear = #ents > 0
 
         if inst.AnimState:IsCurrentAnimation("inactive") and isGhostNear then

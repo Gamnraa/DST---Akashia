@@ -39,7 +39,7 @@ function RechargeableAltar:ReceiveFuel(item)
         self.currentcharges = self.currentcharges + 1
         self.currentfuel = 0
         self.accepting = self.currentcharges < self.maxcharges
-        if self.onreceivecharge then self.onreceivechargefn(self.inst) end
+        if self.onreceivechargefn then self.onreceivechargefn(self.inst) end
     end
 
     if item then item:Remove() end
