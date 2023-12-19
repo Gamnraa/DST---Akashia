@@ -29,6 +29,28 @@ local function hasphysics(obj)
     return obj.Physics ~= nil
 end
 
+local function checkforghost(inst)
+    if inst.components.rechargeablealtar:IsCharged() then
+        local pos = inst:GetPosition()
+        local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, TUNING.RESEARCH_MACHINE_DIST, {"playerghost"})
+        local isGhostNear = #ents > 0
+
+        if inst.AnimState:IsCurrentAnimation("inactive") and isGhostNear then
+            inst.AnimState:PlayAnimation("active_pre")
+            inst.AnimState:PushAnimation("active", true)
+        elseif inst.AnimState:IsCurrentAnimation("active") and not isGhostNear then
+            inst.AnimState:PlayAnimation("active_pst")
+            inst.AnimState:PushAnimation("inactive", true)
+        end
+    end
+end
+
+local function oncharged(inst)
+    inst:AddComponent("hauntable")
+    inst.components.hauntable:SetHauntValue(TUNING.HAUNT_INSTANT_REZ)
+    inst.components.hauntable:SetOnHauntFn(onhaunt)
+end
+
 local function onactivateresurrection(inst, target)
     if inst._task then
         inst._task:Cancel()
@@ -36,6 +58,10 @@ local function onactivateresurrection(inst, target)
     end
     TheWorld:PushEvent("ms_sendlightningstrike", inst:GetPosition())
     target:PushEvent("usedtouchstone", inst)
+    inst.components.rechargeablealtar:UseCharge()
+    if not inst.components.rechargeablealtar:IsCharged() then
+        inst:RemoveComponent("hauntable")
+    end
 end
 
 local function fn()
