@@ -104,11 +104,12 @@ local function fn()
 
     inst:AddComponent("rechargeablealtar")
     inst.components.rechargeablealtar:SetAcceptedItems(TUNING.ALTAR_AKASHIA_ITEMS)
+    inst.components.rechargeablealtar.onreceivechargefn = oncharged
 
     inst._task = nil
 
     inst:ListenForEvent("activateresurrection", onactivateresurrection)
-    inst:DoTaskInTime(.5, function(inst) checkforghost(inst) end)
+    inst:DoPeriodicTask(.5, function(inst) checkforghost(inst) end)
 
     return inst
 end
