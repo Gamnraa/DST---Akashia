@@ -30,7 +30,7 @@ local function AttemptSpell(inst, target)
         fx.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, -50, 0)
         fx:Setup(target)
         if inst.power == 3 then
-            --
+            target:AddDebuff("buff_akashia_staff", "buff_akashia_staff")
         end
 	elseif target == caster and caster.components.health.currenthealth >= TUNING.AKASHIA_MAX_HEALING / 2 then
         caster.components.health:DoDelta(-TUNING.AKASHIA_MAX_HEALING / 2)
@@ -113,11 +113,79 @@ end
     return Prefab(name, fn, assets)
 end
 
+local function OnTick(inst, target)
+    if target.components.health ~= nil and
+        not target.components.health:IsDead() and
+        not target:HasTag("playerghost") then
+        target.components.health:DoDelta(6, nil, "akashia_staff")
+    else
+        inst.components.debuff:Stop()
+    end
+end
+
+local function OnAttached(inst, target)
+    inst.entity:SetParent(target.entity)
+    inst.Transform:SetPosition(0, 0, 0) --in case of loading
+    inst.task = inst:DoPeriodicTask(3, OnTick, nil, target)
+    inst:ListenForEvent("death", function()
+        inst.components.debuff:Stop()
+    end, target)
+end
+
+local function OnTimerDone(inst, data)
+    if data.name == "regenover" then
+        inst.components.debuff:Stop()
+    end
+end
+
+local function OnExtended(inst, target)
+    inst.components.timer:StopTimer("regenover")
+    inst.components.timer:StartTimer("regenover", TUNING.JELLYBEAN_DURATION)
+    inst.task:Cancel()
+    inst.task = inst:DoPeriodicTask(3, OnTick, nil, target)
+end
+
+local function CreateBuff(name)
+	local function fn()
+		local inst = CreateEntity()
+	
+		if not TheWorld.ismastersim then
+			--Not meant for client!
+			inst:DoTaskInTime(0, inst.Remove)
+	
+			return inst
+		end
+	
+		inst.entity:AddTransform()
+	
+		--[[Non-networked entity]]
+		--inst.entity:SetCanSleep(false)
+		inst.entity:Hide()
+		inst.persists = false
+	
+		inst:AddTag("CLASSIFIED")
+	
+		inst:AddComponent("debuff")
+		inst.components.debuff:SetAttachedFn(OnAttached)
+		inst.components.debuff:SetDetachedFn(inst.Remove)
+		inst.components.debuff:SetExtendedFn(OnExtended)
+		inst.components.debuff.keepondespawn = true
+	
+		inst:AddComponent("timer")
+		inst.components.timer:StartTimer("regenover", 15)
+		inst:ListenForEvent("timerdone", OnTimerDone)
+	
+		return inst
+	end
+	return Prefab(name, fn, assets)
+end
+
 STRINGS.NAMES.AKASHIA_STAFF1 = "Waning Caregiver's Staff"
 STRINGS.NAMES.AKASHIA_STAFF2 = "Waxing Caregiver's Staff"
 STRINGS.NAMES.AKASHIA_STAFF3 = "Staff of the Full Moon"
 return CreateStaff("akashia_staff1", "staff01", 1),
 	   CreateStaff("akashia_staff2", "staff02", 2),
-       CreateStaff("akashia_staff3", "staff03", 3)
+       CreateStaff("akashia_staff3", "staff03", 3),
+	   CreateBuff("buff_akashia_staff")
 
 
