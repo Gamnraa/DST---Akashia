@@ -82,6 +82,7 @@ local function fn()
 
     inst.AnimState:SetBank("altar_akashia")
     inst.AnimState:SetBuild("altar_akashia")
+    inst.AnimState:SetScale(2, 2)
     inst.AnimState:PlayAnimation("place")
     inst.AnimState:PushAnimation("inactive", true)
     inst.AnimState:SetLayer(LAYER_WORLD)
