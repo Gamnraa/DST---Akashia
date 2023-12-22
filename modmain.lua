@@ -169,7 +169,7 @@ end)
 AddCharacterRecipe("akashia_staff1",
 	{Ingredient("petals", 4),
 	 Ingredient("twigs", 4),
-     Ingredient("gold", 2),
+     Ingredient("goldnugget", 2),
      Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50)},
 	GLOBAL.TECH.NONE,
 	{
@@ -216,7 +216,7 @@ AddCharacterRecipe("altar_akashia",
      Ingredient("marble", 5),
      Ingredient("nightmarefuel", 10),
     },
-    GLOBAL.TECH_MAGIC_TWO,
+    GLOBAL.TECH.MAGIC_TWO,
     {
         placer = "altar_akashia_placer",
         builder_tag = "akashia",
