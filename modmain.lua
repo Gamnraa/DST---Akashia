@@ -47,9 +47,14 @@ Assets = {
 
     Asset( "IMAGE", "images/inventoryimages/akashia_staff3.tex"),
     Asset( "ATLAS", "images/inventoryimages/akashia_staff3.xml"),
+
+    Asset( "IMAGE", "images/inventoryimages/altar_akashia.tex"),
+    Asset( "ATLAS", "images/inventoryimages/altar_akashia.xml"),
+
 }
 
 AddMinimapAtlas("images/map_icons/akashia.xml")
+AddMinimapAtlas("images/map_icons/altar_akashia.xml")
 
 local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
@@ -212,7 +217,7 @@ AddCharacterRecipe("akashia_staff3",
 	})
 
 AddCharacterRecipe("altar_akashia",
-    {Ingredient("moonrock", 10),
+    {Ingredient("moonrocknugget", 10),
      Ingredient("marble", 5),
      Ingredient("nightmarefuel", 10),
     },
@@ -220,7 +225,7 @@ AddCharacterRecipe("altar_akashia",
     {
         placer = "altar_akashia_placer",
         builder_tag = "akashia",
-        atlas = "images/minimap/altar_akashia.xml",
+        atlas = "images/inventoryimages/altar_akashia.xml",
         image = "altar_akashia.tex"
     })
         

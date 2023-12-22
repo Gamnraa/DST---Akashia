@@ -90,6 +90,9 @@ local function fn()
 
     inst:AddTag("resurrector")
 
+    inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon( "altar_akashia.tex" )
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
