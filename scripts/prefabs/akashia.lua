@@ -58,6 +58,13 @@ local function onload(inst)
     end
 end
 
+local function oneat(inst, food)
+	if food.components.edible and food.components.edible.foodtype == FOODTYPE.VEGGIE or food.components.edible.foodtype == FOODTYPE.BERRY then
+		--inst.components.health:DoDelta(food.components.edible.healthvalue / 2)
+		food.components.edible.healthvalue = food.components.edible.healthvalue / 2
+	end
+end
+
 
 -- This initializes for both the server and client. Tags can be added here.
 local common_postinit = function(inst) 
@@ -93,6 +100,8 @@ local master_postinit = function(inst)
 
 	inst.entsProtecting = {}
 	inst:DoPeriodicTask(1, function() updateentitiesinrange(inst) end)
+
+	inst.components.eater:SetOnEatFn(oneat)
 	
 end
 
