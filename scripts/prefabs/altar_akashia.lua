@@ -115,4 +115,5 @@ local function fn()
 end
 STRINGS.NAMES.ALTAR_AKASHIA = "Lunar Soul-Catcher"
 
-return Prefab("altar_akashia", fn, assets)
+return Prefab("altar_akashia", fn, assets),
+    MakePlacer("altar_akashia_placer", "altar_akashia", "altar_akashia", "inactive")

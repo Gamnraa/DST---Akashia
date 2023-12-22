@@ -165,5 +165,63 @@ end
 AddPlayerPostInit(function(inst)
     inst:ListenForEvent("respawnfromghost", OnRespawnFromGhost)
 end)
+
+AddCharacterRecipe("akashia_staff1",
+	{Ingredient("petals", 4),
+	 Ingredient("twigs", 4),
+     Ingredient("gold", 2),
+     Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50)},
+	GLOBAL.TECH.NONE,
+	{
+		product = "akashia_staff1",
+		builder_tag = "akashia",
+		numtogive = 1,
+	},
+	{
+		"MAGIC",
+	})
+
+AddCharacterRecipe("akashia_staff2",
+	{Ingredient("akashia_staff1", 1),
+     Ingredient("petals_evil", 6),
+	 Ingredient("livinglog", 4),
+     Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50)},
+	GLOBAL.TECH.MAGIC_TWO,
+	{
+		product = "akashia_staff2",
+		builder_tag = "akashia",
+		numtogive = 1,
+	},
+	{
+		"MAGIC",
+	})
+
+AddCharacterRecipe("akashia_staff3",
+	{Ingredient("akashia_staff2", 1),
+     Ingredient("greenmooneye", 1),
+	 Ingredient("nightmarefuel", 3),
+     Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50)},
+	GLOBAL.TECH.MAGIC_THREE,
+	{
+		product = "akashia_staff3",
+		builder_tag = "akashia",
+		numtogive = 1,
+	},
+	{
+		"MAGIC",
+	})
+
+AddCharacterRecipe("altar_akashia",
+    {Ingredient("moonrock", 10),
+     Ingredient("marble", 5),
+     Ingredient("nightmarefuel", 10),
+    },
+    GLOBAL.TECH_MAGIC_TWO,
+    {
+        placer = "altar_akashia_placer",
+        builder_tag = "akashia",
+        atlas = "images/minimap/altar_akashia.xml",
+        image = "altar_akashia.tex"
+    })
         
 
