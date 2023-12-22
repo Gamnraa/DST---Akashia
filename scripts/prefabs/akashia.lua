@@ -60,8 +60,11 @@ end
 
 local function oneat(inst, food)
 	if food.components.edible and food.components.edible.foodtype == FOODTYPE.VEGGIE or food.components.edible.foodtype == FOODTYPE.BERRY then
-		--inst.components.health:DoDelta(food.components.edible.healthvalue / 2)
-		food.components.edible.healthvalue = food.components.edible.healthvalue / 2
+		inst.components.health:DoDelta(food.components.edible.healthvalue / 2)
+
+		if food.prefab == "pumpkincookie" then
+			inst.components.health:DoDelta(30)
+		end
 	end
 end
 
@@ -101,6 +104,7 @@ local master_postinit = function(inst)
 	inst.entsProtecting = {}
 	inst:DoPeriodicTask(1, function() updateentitiesinrange(inst) end)
 
+	inst.components.foodaffinity:AddPrefabAffinity("pumpkincookie", TUNING.AFFINITY_15_CALORIES_SMALL)
 	inst.components.eater:SetOnEatFn(oneat)
 	
 end
