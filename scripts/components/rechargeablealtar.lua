@@ -1,6 +1,6 @@
 local RechargeableAltar = Class(function(self, inst)
     self.inst = inst
-    self.maxcharges = 2
+    self.maxcharges = 1
     self.currentcharges = 1
     self.maxfuel = 100
     self.currentfuel = 0
