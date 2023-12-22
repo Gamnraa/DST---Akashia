@@ -35,6 +35,28 @@ local function updateentitiesinrange(inst)
 	end
 end	
 
+--Taking this straight for Miz's Lucas
+local oneoftags = {
+	"insect","smallcreature","largecreature","prey","bird","animal","smallbird","pig","manrabbit",
+}
+
+
+local function onkill(inst, data) 
+	local victim=data.victim
+	if victim then
+		if victim:HasTag("hostile") then
+			return
+		end
+		for i=1, #oneoftags do 
+			if victim:HasTag(oneoftags[i]) then 
+				inst.components.sanity:DoDelta(-20)
+				return
+			end
+		end
+	end
+end
+	
+
 -- When the character is revived from human
 local function onbecamehuman(inst)
 	-- Set speed when not a ghost (optional)
@@ -106,6 +128,8 @@ local master_postinit = function(inst)
 
 	inst.components.foodaffinity:AddPrefabAffinity("pumpkincookie", TUNING.AFFINITY_15_CALORIES_SMALL)
 	inst.components.eater:SetOnEatFn(oneat)
+
+	inst:ListenForEvent("killed", onkill)
 	
 end
 
