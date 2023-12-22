@@ -29,7 +29,7 @@ local function AttemptSpell(inst, target)
         fx:DoTaskInTime(1.5, function() colourfn:Cancel() end)
         fx.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, -50, 0)
         fx:Setup(target)
-        if inst.power == 3 then
+        if inst.level == 3 then
             target:AddDebuff("buff_akashia_staff", "buff_akashia_staff")
         end
 	elseif target == caster and caster.components.health.currenthealth >= TUNING.AKASHIA_MAX_HEALING / 2 then
