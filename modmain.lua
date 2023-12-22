@@ -51,6 +51,10 @@ Assets = {
     Asset( "IMAGE", "images/inventoryimages/altar_akashia.tex"),
     Asset( "ATLAS", "images/inventoryimages/altar_akashia.xml"),
 
+    Asset( "IMAGE", "images/map_icons/altar_akashia.tex"),
+    Asset( "ATLAS", "images/map_icons/altar_akashia.xml"),
+
+
 }
 
 AddMinimapAtlas("images/map_icons/akashia.xml")
@@ -169,6 +173,10 @@ end
 
 AddPlayerPostInit(function(inst)
     inst:ListenForEvent("respawnfromghost", OnRespawnFromGhost)
+end)
+
+AddPrefabPostInit("altar_akashia_placer", function(inst)
+    inst.AnimState:SetScale(2, 2, 2)
 end)
 
 AddCharacterRecipe("akashia_staff1",
