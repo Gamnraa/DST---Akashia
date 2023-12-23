@@ -5,7 +5,7 @@ local RechargeableAltar = Class(function(self, inst)
     self.maxfuel = 100
     self.currentfuel = 0
     self.accepteditems = {} --format the table to be k = prefabname, v = amount to fuel
-    self.accepting = true
+    self.accepting = self.maxcharges ~= self.currentcharges
     self.onreceivechargefn = nil
 end)
 

@@ -93,6 +93,10 @@ local function fn()
     inst.entity:AddMiniMapEntity()
 	inst.MiniMapEntity:SetIcon( "altar_akashia.tex" )
 
+    inst:AddComponent("rechargeablealtar")
+    inst.components.rechargeablealtar:SetAcceptedItems(TUNING.ALTAR_AKASHIA_ITEMS)
+    inst.components.rechargeablealtar.onreceivechargefn = oncharged
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -104,10 +108,6 @@ local function fn()
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_INSTANT_REZ)
     inst.components.hauntable:SetOnHauntFn(onhaunt)
-
-    inst:AddComponent("rechargeablealtar")
-    inst.components.rechargeablealtar:SetAcceptedItems(TUNING.ALTAR_AKASHIA_ITEMS)
-    inst.components.rechargeablealtar.onreceivechargefn = oncharged
 
     inst._task = nil
 
