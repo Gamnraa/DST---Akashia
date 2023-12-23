@@ -4,11 +4,6 @@ local assets = {
     Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
 }
 
--- Your character's stats
-TUNING.AKASHIA_HEALTH = 150
-TUNING.AKASHIA_HUNGER = 150
-TUNING.AKASHIA_SANITY = 200
-
 -- Custom starting inventory
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.AKASHIA = {
 }
