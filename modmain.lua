@@ -64,11 +64,11 @@ local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
 
 -- The character select screen lines
-STRINGS.CHARACTER_TITLES.akashia = "The Elf Healer"
+STRINGS.CHARACTER_TITLES.akashia = "The Elf Mother"
 STRINGS.CHARACTER_NAMES.akashia = "Akashia"
 STRINGS.CHARACTER_DESCRIPTIONS.akashia = "*Is a skilled sage\n*Prefers a veggie diet\n*Has empathy for all living things"
-STRINGS.CHARACTER_QUOTES.akashia = "\"\""
-STRINGS.CHARACTER_SURVIVABILITY.akashia = "Slim"
+STRINGS.CHARACTER_QUOTES.akashia = "\"Don't worry, we'll get out of this place. Together.\""
+STRINGS.CHARACTER_SURVIVABILITY.akashia = "By her will"
 
 -- Custom speech strings
 STRINGS.CHARACTERS.AKASHIA = require "speech_akashia"
