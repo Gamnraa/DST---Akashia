@@ -36,8 +36,8 @@ local function AttemptSpell(inst, target)
         caster.components.health:DoDelta(-TUNING.AKASHIA_MAX_HEALING / 2)
         local pos = caster:GetPosition()
         for _, v in pairs(TheSim:FindEntities(pos.x, pos.y, pos.z, 9, {"_combat"}, {"monster", "epic", "playerghost"}, {"player", "companion"})) do
-            print(v)
-            if v.components.health then 
+            
+            if v.components.health and v ~= caster then 
                 v.components.health:DoDelta(TUNING.AKASHIA_MAX_HEALING)
                 local fx = SpawnPrefab("wortox_soul_heal_fx")
                 local colourfn = fx:DoPeriodicTask(.167, function() fx.AnimState:SetAddColour(math.random(256) / 255, math.random(256) / 255, math.random(256) / 255, 0) end)
