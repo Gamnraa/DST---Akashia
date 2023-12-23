@@ -179,6 +179,32 @@ AddPrefabPostInit("altar_akashia_placer", function(inst)
     inst.AnimState:SetScale(2, 2, 2)
 end)
 
+--Might switch to ComponentPostInit so all crockpots will double yields
+--Code by Lucas (a different Lucas, not me)
+AddPrefabPostInit("cookpot", function(inst)
+    if inst.components.stewer == nil then
+        return
+    end
+    -- using the same harvest logic and repeat the item giving step once
+    local old_harvest = inst.components.stewer.Harvest
+    inst.components.stewer.Harvest = function(self, harvester)
+        if harvester and harvester.prefab == "akashia" then
+            if self.done and self.product and harvester.components.inventory then
+                local loot = GLOBAL.SpawnPrefab(self.product)
+                if loot ~= nil then
+                    if self.spoiltime ~= nil and loot.components.perishable ~= nil then
+                        local spoilpercent = self:GetTimeToSpoil() / self.spoiltime
+                        loot.components.perishable:SetPercent(self.product_spoilage * spoilpercent)
+                        loot.components.perishable:StartPerishing()
+                    end
+                    harvester.components.inventory:GiveItem(loot, nil, self.inst:GetPosition())
+                end
+            end
+        end
+        return old_harvest(self, harvester)
+    end
+end)
+
 AddCharacterRecipe("akashia_staff1",
 	{Ingredient("petals", 4),
 	 Ingredient("twigs", 4),
